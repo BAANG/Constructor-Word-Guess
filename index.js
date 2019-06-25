@@ -2,3 +2,4 @@
     var inquirer = require('inquirer')
     var chalk = require('chalk')
     var Word = require('./Word.js')
+    var randomWords = require('random-words')
