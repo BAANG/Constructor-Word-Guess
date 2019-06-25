@@ -21,12 +21,15 @@
             guessesLeft = 12
             var generateWord = randomWords()
             guessWord = new Word(generateWord)
+            console.log("\n")
+            console.log(chalk.magenta("GUESS THIS WORD:"))
             guessWord.returnString()
             guessPrompt();
         }
     })
 
     function guessPrompt() {
+        console.log("\n")
         inquirer.prompt([
             {
                 type: 'input',
@@ -34,19 +37,22 @@
                 message: 'Choose a letter... [A-Z]'
             }
         ]).then(function(response) {
-            if ( // Conditional statements to validate the user response
-            (!alphabet.includes(response.userGuess)) && 
-            (response.userGuess.length = 1) && 
-            (!guessedLetters.includes(response.userGuess))
-            ) { // Pushes user input into array of valid inputs, reduces number of guesses left, and checks if guess was correct
-                guessedLetters.push(response.userGuess);
-                guessesLeft--;
-                guessWord.userGuess(response.userGuess);
-                guessWord.returnString()
+            console.log("\n")
+            var userInput = response.userGuess.toLowerCase();
+            if (!alphabet.includes(userInput) || guessedLetters.includes(userInput) ||userInput === "" || userInput === " ") {
+                console.log('\nYou must enter a valid letter [A-Z]')
+                console.log("You've guessed: " + guessedLetters + "\n")
+                console.log(chalk.magenta("GUESS THIS WORD:"))
+                guessWord.returnString();
                 guessPrompt();
-
-            } else {
-                console.log('You must enter a valid letter [A-Z]')
+                
+            } else if (userInput.length = 1){ // Pushes user input into array of valid inputs, reduces number of guesses left, and checks if guess was correct
+                guessedLetters.push(userInput);
+                console.log("\nYou've guessed: " + guessedLetters + "\n")
+                guessesLeft--;
+                guessWord.userGuess(userInput);
+                console.log(chalk.magenta("GUESS THIS WORD:"))
+                guessWord.returnString()
                 guessPrompt();
             }
         })
