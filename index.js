@@ -13,17 +13,24 @@
     
     
     function playGame() {
-        generateWord = randomWords();
-        storeSolution();
+        guessedLetters = [];
+        correctLetters = [];
+        correctGuess = [];
+
         function storeSolution () {
+            generateWord = randomWords();
             unsortedArray = [];
             for (var i = 0; i < generateWord.length; i ++) {
                 if (!correctLetters.includes(generateWord[i])) {
                     unsortedArray.push(generateWord[i])
+                    // console.log(unsortedArray)
+                    correctLetters = unsortedArray.sort();
                 }
             }
-            correctLetters = unsortedArray.sort();
+            // console.log("\n" + correctGuess + " is the correct guess array")
+            // console.log(correctLetters + " is the correct letters array\n")
         }
+        storeSolution();
 
         inquirer.prompt([
             {
@@ -83,24 +90,22 @@
         // console.log(correctLetters + " is the correct letters array\n")
 
             if (correctGuess.length === correctLetters.length && guessesLeft > 0) {
-            console.log('############')
+            console.log('\n############')
             console.log('############')
             console.log('##YOU WIN!##')
             console.log('############')
             console.log('############\n\n')
 
-            correctLetters = [];
             playGame();
         } else if (guessesLeft > 0) {
             guessPrompt();
         } else if (guessesLeft = 0) {
-            console.log('#############')
+            console.log('\n#############')
             console.log('#############')
             console.log('#YOU LOSE...#')
             console.log('#############')
-            console.log('#############')
+            console.log('#############\n\n')
 
-            correctLetters = [];
             playGame();
         }
     }
