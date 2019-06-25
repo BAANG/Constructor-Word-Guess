@@ -10,14 +10,14 @@ var Word = function(currentWord) {
     
     this.returnString = function() { // Checks each letter object and concatenates either a space, an underscore or the letter depending on the conditions set/returned by checkLetter function
         this.printString = "";
-        for (var i = 0; i < letters.length; i ++) {
-           this.printString += (printletters[i].checkLetter()) + " "
+        for (var i = 0; i < this.letters.length; i ++) {
+           this.printString += (this.letters[i].checkLetter()) + " "
         }
         console.log(this.printString)
     }
 
     this.userGuess = function(userInput) { // Compares user input to each of the stored letter objects in array
-        for (var i = 0; i < letters.length; i ++) {
+        for (var i = 0; i < this.letters.length; i ++) {
             this.letters[i].checkGuess(userInput) 
         }
     }
