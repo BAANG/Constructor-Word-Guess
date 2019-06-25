@@ -100,6 +100,7 @@
         } else if (guessesLeft > 0) {
             guessPrompt();
         } else if (guessesLeft = 0) {
+
             console.log('\n#############')
             console.log('#############')
             console.log('#YOU LOSE...#')
